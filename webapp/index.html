@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: bisque;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    p, h1, h2, ul, ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    button, input {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .texts-list {
+      list-style: none;
+      padding: 10px;
+      display: grid;
+      gap: 12px;
+      overflow: auto;
+    }
+
+    .texts-list li {
+      display: grid;
+      grid-template-columns: 100px 1fr 180px;
+      gap: 12px;
+    }
+
+    .texts-list li:hover {
+      background-color: #efefef;
+    }
+
+    .texts-list li.is-selected {
+      background-color: #e9e9e9;
+    }
+
+    img {
+      position: relative;
+      max-width: 100%;
+    }
+
+    img::before {
+     content: '';
+     width: 100%;
+     height: 100%;
+     background-color: #ccc;
+     position: absolute;
+     top: 0;
+     left: 0;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 1fr 800px;
+      overflow: hidden;
+    }
+
+    .image-search {
+      padding: 10px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .image-search .image-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-rows: 200px;
+      gap: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+
+    .image-search .image-results img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+    }
+    
+    .image-search .image-results input {
+      display: none;
+    }
+
+    .image-search .image-results input:checked + img {
+      outline: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    MakeVid
+    <button onclick="save();">Save</button>
+  </header>
+  <div class="app">
+    <ol class="texts-list">
+    </ol>
+    <div class="image-search">
+      <input type="text">
+      <ul class="image-results">
+      </ul>
+      <div class="uploader">
+        upload photo: <button>Upload</button>
+      </div>
+    </div>
+  </div>
+<script>
+function postRequest(url, data){
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(r => r.json())
+}
+
+
+function debouncer(callback, delay){
+  delay = delay || 1000;
+  let timer;
+  const push = () => {
+    clearTimeout(timer);
+    timer = setTimeout(callback, delay)
+  }
+  return push;
+}
+
+class EventEmitter{
+  constructor(){
+    this.listeners = {};
+  }
+
+  on(eventName, callback){
+    if(!this.listeners[eventName]) this.listeners[eventName] = [];
+    this.listeners[eventName].push(callback)
+  }
+
+  emit(eventName, data){
+    if(!this.listeners[eventName]) return;
+    this.listeners[eventName].forEach(callback => callback(data))
+  }
+}
+
+class ImageSearch extends EventEmitter{
+  constructor(){
+    super();
+    const el = document.querySelector('.image-search');
+    const elInput = el.querySelector('input');
+    const elResultsList = el.querySelector('ul');
+
+    const select = (elLi) => {
+      if(el.querySelector('.is-selected'))
+        el.querySelector('.is-selected').classList.remove('is-selected')
+      elLi.classList.add('is-selected')
+      this._selectedImageId = elLi.dataset.imageId;
+      this._selectedImageThumb = elLi.querySelector('img').src;
+      this.emit('select', {imageId: this._selectedImageId, imageThumb: this._selectedImageThumb})
+    }
+
+    const search = async () => {
+      const results = await postRequest('/api/imagesearch', {query: elInput.value})
+      elResultsList.innerHTML = results.map(img => `
+        <li data-image-id="${img.id}">
+          <img src=${img.url} />
+        </li>
+      `).join('')
+    }
+
+    elInput.addEventListener('input', debouncer(search))
+    
+    el.addEventListener('click', e => {
+      const li = e.target.closest('li');
+      if(li) 
+        select(li);
+    })
+  }
+  
+}
+
+class TextsList extends EventEmitter{
+  constructor(){
+    super();
+    const el = document.querySelector('.texts-list');
+    this._el = el;
+    const select = (elLi) => {
+      if(el.querySelector('.is-selected'))
+      el.querySelector('.is-selected').classList.remove('is-selected')
+      elLi.classList.add('is-selected')
+      this._selectedIndex = elLi.dataset.index;
+      this._selectedLi = elLi;
+      this.emit('select', {index: this._selectedIndex})
+    }
+
+    el.addEventListener('click', e => {
+      const li = e.target.closest('li');
+      if(li) 
+        select(li);
+    })
+  }
+
+  async load(){
+    const project = 'shortNewYorkFastTour';
+    const data = await postRequest('/load', {project})
+    this._el.innerHTML = data.map((d, index) => {
+      return `<li data-index=${index}>
+        <strong class="time">${d.start}</strong>
+        <p class="text">${d.text}</p>
+        <img src="${d.imageThumb}" />
+      </li>`
+    }).join('')
+    this._data = data;
+  }
+
+  async save(){
+    const project = 'shortNewYorkFastTour';
+    await postRequest('/save', {project, data: this._data})
+  }
+
+  setSelectedRowImage(imageThumb, imageId){
+    this._data[this._selectedIndex].imageThumb = imageThumb;
+    this._data[this._selectedIndex].imageId = imageId; 
+    this._selectedLi.querySelector('img').src = imageThumb;
+  }
+
+  get selectedIndex(){
+    return this._selectedIndex;
+  }
+
+}
+
+function main(){
+  const texts = new TextsList();
+  const imageSearch = new ImageSearch(); 
+
+  texts.load();
+  imageSearch.on('select', data => {
+    texts.setSelectedRowImage(data.imageThumb, data.imageId)
+  })
+
+  window.save = () => {
+    texts.save();
+  }
+}
+
+main()
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+0.921466	1.864362	מה נעשה ממה	RtUK6jT5y_A	https://images.unsplash.com/photo-1603968341463-53c1957ea6b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwxfHxzaWdofGVufDB8fHx8MTY4MTc1MDg2OQ&ixlib=rb-4.0.3&q=80&w=200
+1.950080	3.407283	בואי נגיד שאנחנו נוסעות	0QcSnCM0aMc	https://images.unsplash.com/photo-1553697388-94e804e2f0f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwxfHxwYXNzcG9ydHxlbnwwfHx8fDE2ODE3NTA5ODg&ixlib=rb-4.0.3&q=80&w=200
+3.407283	3.985878	מה נעשה?	SS-r7BvCqTY	https://images.unsplash.com/photo-1613151096599-b234757eb4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw4fHxib3JlZHxlbnwwfHx8fDE2ODE3NTIxMjA&ixlib=rb-4.0.3&q=80&w=200
+4.585903	5.582372	אוקיי נגיד	hqp_8ViHl4E	https://images.unsplash.com/photo-1559156160-866997559cc1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw5fHxiZWR8ZW58MHx8fHwxNjgxNzUyMTU0&ixlib=rb-4.0.3&q=80&w=200
+5.582372	6.300259	קמנו	kqDEH7M2tGk	https://images.unsplash.com/photo-1507141975227-b9e55279a1f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwyfHx3YWtlJTIwdXB8ZW58MHx8fHwxNjgxNzUyMTc4&ixlib=rb-4.0.3&q=80&w=200
+6.300259	7.527095	קמנו לא מוקדם במיוחד	ei9OkVw-4O8	https://images.unsplash.com/photo-1559575478-195bd74b0a57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw2fHxhbGFybSUyMGNsb2NrfGVufDB8fHx8MTY4MTc1MjIxMg&ixlib=rb-4.0.3&q=80&w=200
+7.527095	8.394988	נסענו לעיר	6WrKKQcEnXk	https://images.unsplash.com/photo-1594058573823-d8edf1ad3380?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MXwxfHNlYXJjaHw4fHxjaXR5fGVufDB8fHx8MTY4MTc1MjMwNQ&ixlib=rb-4.0.3&q=80&w=200
+8.394988	10.248636	נסענו נסענו למקומות תיירותיים	7etIYqqw2jU	https://images.unsplash.com/photo-1522010675502-c7b3888985f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwxfHx0b3VyaXN0fGVufDB8fHx8MTY4MTc1MjMxOQ&ixlib=rb-4.0.3&q=80&w=200
+11.025453	12.305863	הסתובבנו בסנטרל פארק	AUmq5VsgL3g	https://images.unsplash.com/photo-1631499545782-7d09b3a7dcf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw5fHxjZW50cmFsJTIwcGFya3xlbnwwfHx8fDE2ODE3NTIzNDk&ixlib=rb-4.0.3&q=80&w=200
+12.932675	14.572028	אכלנו באיזה מאפיה		
+14.572028	16.356030	איזה קוראסו איזה זה	RMCHhAxXbWE	https://images.unsplash.com/photo-1580650487485-7f3a88a39499?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwzfHxjYWZlJTIwY2hhdHxlbnwwfHx8fDE2ODE3NTI1NDA&ixlib=rb-4.0.3&q=80&w=200
+17.314998	18.182890	מה? מה?	Y4wpkK_JWWk	https://images.unsplash.com/photo-1619625608289-e395bb37493b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwyfHxzaWdofGVufDB8fHx8MTY4MTc1MDg2OQ&ixlib=rb-4.0.3&q=80&w=200
+18.809702	20.186544	עלינו לראש של ה..	GbFCv3Uf2uE	https://images.unsplash.com/photo-1485872987516-ec9b00fe7a65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw1fHxtb3VudGFpbiUyMGNsaW1iZXJ8ZW58MHwxfHx8MTY4MTc1MjY3NQ&ixlib=rb-4.0.3&q=80&w=200
+20.754425	22.608072	קרוזינ-זיבי		
+22.608072	23.550968	בוודאי	Vts5wDKb8PA	https://images.unsplash.com/photo-1520598758991-06c9b1cf7a59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwyfHx0b3B8ZW58MHwxfHx8MTY4MTc1MjczNg&ixlib=rb-4.0.3&q=80&w=200
+23.550968	24.300999	לראות הכל מלמעלה	V9UpOTGFOtA	https://images.unsplash.com/photo-1510846606678-710c05a5c776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHw0fHx0b3AlMjBjaXR5fGVufDB8MXx8fDE2ODE3NTI3NTQ&ixlib=rb-4.0.3&q=80&w=200
+24.938525	27.290408	יופי, זה כמו בסרטים אותו דבר	iLwDW2lSOzk	https://images.unsplash.com/photo-1597575732103-9f6d068cfa9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MzcyMzd8MHwxfHNlYXJjaHwxfHxuZXRmbGl4fGVufDB8MXx8fDE2ODE3NTI3ODE&ixlib=rb-4.0.3&q=80&w=200
+27.536847	30.060165	ראינו את אותו הפסל המזדיין שכבר ראינו		
+30.328033	31.431650	ראינו אותו בריק ומורטי		
+31.431650	32.733489	שבעצם זה סוס טרויאני		
+32.733489	33.413874	אבל שם לא		
+33.413874	34.367485	את רק רואה את הפסל		
+35.722897	37.276533	אין ספיישל פיצ'רס		
+37.276533	38.530156	ספיישל ספיישל אפקטס		
+38.530156	39.381976	כאילו		
+39.381976	40.560596	והוא יפה סבבה		
+40.560596	42.248166	להגיד לך שהוא שווה עכשיו את כל ה...		
+42.719614	43.399999	endeavor		
+43.399999	43.807158	הוא לא		
+44.685766	45.928674	ואז אנחנו נחזור		
+45.928674	47.675175	ולמחרת לא יהיה לנו כוח לנסוע לעיר		
+47.675175	48.526995	ונגיד למה?		
+48.526995	49.973483	אבל נסענו על לפה		
+49.973483	51.350326	אז ניסע שוב לעיר		
+51.350326	53.241475	עכשיו לחלק הדרומי שלה		
+53.546845	54.918330	ונלך לברוקלין		
+55.325489	56.729118	ונעשה בקטע אירוני		
+56.820193	59.123860	סיור מודרך בברוקלין		
+59.718527	61.893616	ונסתכל בגריינדר		
+61.920403	62.836512	מה יש שמה...		
+62.836512	63.543684	מה יש שמה?		
+63.543684	64.690160	בואי אני אעשה לך הפתעה		
+65.000887	65.541981	הומואים		
+65.541981	66.211651	פסיביים		
+66.211651	66.924180	מתנשאים		
+66.924180	67.968866	שלא עונים לך		
+69.308207	70.792196	גירסת ניו יורק		
+70.877914	71.611873	ואז		
+71.611873	72.447622	אנחנו נלך		
+72.447622	73.245869	אנחנו נלך רגע		
+73.267298	73.872680	בברודווי		
+73.872680	74.654855	יהיה יפה		
+75.474532	75.865619	שוב		
+75.865619	76.481716	מה		
+76.481716	76.985308	כאילו		
+76.985308	77.756769	הצדיק את זה?		
+77.826414	78.463940	לא		
+78.951461	79.706849	אנחנו		
+79.706849	81.694430	נלך לאכול בעוד מקומות		
+83.280210	83.832018	וזה יהיה		
+83.832018	84.555262	בסדר		
+85.755312	87.217872	ואנחנו נראה המון		
+87.217872	88.203627	אמריקאים		
+88.203627	89.821550	ויהיה מגעיל		
+90.507293	92.430586	ואנחנו נסתובב ב...		
+92.794887	93.512774	בסוהו		
+93.512774	94.402096	וזה יהיה קול		
+95.077124	96.336104	אנחנו נראה בגדים יפים		
+96.336104	97.664730	אבל זה יהיה יקר		
+99.759459	100.836289	ו...		
+101.773827	102.491714	וזהו		
+102.657792	103.831055	ככה כאילו פשוט נוציא		
+103.831055	105.068606	כמה אלפי שקלים		
+106.643671	108.615180	נאבד מלא שעות שינה		
+109.386641	110.109885	נחזור לארץ		
+110.109885	111.411724	נרגיש שאנחנו חייבים חופשה		
+111.411724	112.606416	דחוף		
+113.436807	114.658286	מהגיהנום הזה		
+116.099417	117.492331	אממ וזהו		
+120.171012	121.113908	לא...		
+121.113908	121.960372	לא קניתי		
