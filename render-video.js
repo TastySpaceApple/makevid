@@ -9,7 +9,7 @@ import { drawCaption } from './utils/drawCaption.js';
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
-const tmpFolder = 'C:\\tmp'
+const tmpFolder = 'tmp'
 
 // Clean up the temporary directories first
 for (const path of ['out', tmpFolder+'/output']) {
@@ -19,7 +19,7 @@ for (const path of ['out', tmpFolder+'/output']) {
     await fs.promises.mkdir(path, { recursive: true });
 }
 
-const project = "01_grindr";
+const project = "shortNewYorkFastTour";
 
 const canvas = new Canvas(720, 1280);
 const context = canvas.getContext('2d');
@@ -84,7 +84,7 @@ async function renderFrame(ctx, time) {
     }
 
     if(lastLabelIndex != labelIndex){
-      let frameImage = await loadImage(`${project}/images/${String(labelIndex+1).padStart(2, '0')}.jpg`)
+      let frameImage = await loadImage(labels[labelIndex].imageFull)
       drawImageProp(ctx, frameImage);
       drawCaption(ctx, labels[labelIndex].text)
       lastLabelIndex = labelIndex;

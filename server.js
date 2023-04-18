@@ -24,8 +24,14 @@ app.post('/save', (req, res) => {
 
 
 app.post('/api/imagesearch', async (req,res) => {
-  const images = await unsplashSearch(req.body.query)
-  res.json(images)
+  try{
+    const images = await unsplashSearch(req.body.query)
+    res.json(images)
+  } catch (e) {
+    console.log(e)
+    res.json([])
+  }
+
 })
 
 app.listen(process.env.PORT || 8000);

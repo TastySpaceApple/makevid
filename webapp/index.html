@@ -106,7 +106,7 @@
       display: none;
     }
 
-    .image-search .image-results input:checked + img {
+    .image-search .image-results li.is-selected {
       outline: 1px solid #000;
     }
   </style>
@@ -124,7 +124,7 @@
       <ul class="image-results">
       </ul>
       <div class="uploader">
-        upload photo: <button>Upload</button>
+        other: <button>Upload</button>
       </div>
     </div>
   </div>
@@ -177,15 +177,15 @@ class ImageSearch extends EventEmitter{
       if(el.querySelector('.is-selected'))
         el.querySelector('.is-selected').classList.remove('is-selected')
       elLi.classList.add('is-selected')
-      this._selectedImageId = elLi.dataset.imageId;
+      this._selectedImageFull = elLi.dataset.imageFull;
       this._selectedImageThumb = elLi.querySelector('img').src;
-      this.emit('select', {imageId: this._selectedImageId, imageThumb: this._selectedImageThumb})
+      this.emit('select', {image: {full: this._selectedImageFull, thumb: this._selectedImageThumb}})
     }
 
     const search = async () => {
       const results = await postRequest('/api/imagesearch', {query: elInput.value})
       elResultsList.innerHTML = results.map(img => `
-        <li data-image-id="${img.id}">
+        <li data-image-full="${img.full}">
           <img src=${img.url} />
         </li>
       `).join('')
@@ -241,9 +241,9 @@ class TextsList extends EventEmitter{
     await postRequest('/save', {project, data: this._data})
   }
 
-  setSelectedRowImage(imageThumb, imageId){
+  setSelectedRowImage(imageThumb, imageFull){
     this._data[this._selectedIndex].imageThumb = imageThumb;
-    this._data[this._selectedIndex].imageId = imageId; 
+    this._data[this._selectedIndex].imageFull = imageFull; 
     this._selectedLi.querySelector('img').src = imageThumb;
   }
 
@@ -259,12 +259,17 @@ function main(){
 
   texts.load();
   imageSearch.on('select', data => {
-    texts.setSelectedRowImage(data.imageThumb, data.imageId)
+    texts.setSelectedRowImage(data.image.thumb, data.image.full)
   })
 
   window.save = () => {
     texts.save();
   }
+
+  document.querySelector('.uploader button').addEventListener('click', e => {
+    const url = prompt("enter image url")
+    texts.setSelectedRowImage(url, url)
+  })
 }
 
 main()

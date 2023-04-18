@@ -5,16 +5,16 @@ export function readProjectLabels(projectName){
   const file = path.join('projects', projectName, 'labels.txt')
   const content = fs.readFileSync(file, "utf8");
   return content.split('\r\n').map(line => {
-    const [start, end, text, imageId, imageThumb] = line.split('\t')
-    return {start, end, text, imageId, imageThumb}
+    const [start, end, text, imageFull, imageThumb] = line.split('\t')
+    return {start, end, text, imageFull, imageThumb}
   }).filter(line => !!line.text)
 }
 
 export function writeProjectLabels(projectName, data){
   const file = path.join('projects', projectName, 'labels.txt')
   const content = data.map(line => {
-    const {start, end, text, imageId, imageThumb} = line;
-    return [start, end, text, imageId, imageThumb].join('\t')
+    const {start, end, text, imageFull, imageThumb} = line;
+    return [start, end, text, imageFull, imageThumb].join('\t')
   }).join('\r\n')
   fs.writeFileSync(file, content);
 }
