@@ -5,6 +5,7 @@ import { Canvas, loadImage, registerFont } from 'canvas';
 import { stitchFramesToVideo } from './utils/stitchFramesToVideo.js';
 import { drawImageProp } from './utils/drawImageProp.js';
 import { drawCaption } from './utils/drawCaption.js';
+import { readProjectLabels } from './utils.js'
 
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
@@ -24,7 +25,7 @@ const project = "shortNewYorkFastTour";
 const canvas = new Canvas(720, 1280);
 const context = canvas.getContext('2d');
 
-const labels = readFileLabels(`${project}/labels.txt`);
+const labels = readProjectLabels(project);
 console.log(labels.length)
 
 
@@ -92,13 +93,4 @@ async function renderFrame(ctx, time) {
     }
 
     return false;
-}
-
-function readFileLabels(file){
-  const content = fs.readFileSync(file, "utf8");
-  return content.split('\n').map(line => {
-    console.log(line)
-    const [start, end, text] = line.split('\t')
-    return {start, end, text}
-  }).filter(line => !!line.text)
 }

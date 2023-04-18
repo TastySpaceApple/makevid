@@ -13,12 +13,12 @@ export async function unsplashSearch(query){
     perPage: 20,
     orientation: 'portrait',
   });
-  return imageSearch.response.results.map(r => ({url: r.urls.thumb, full: r.urls.full}))
+  return imageSearch.response.results.map(r => ({thumb: r.urls.thumb, full: r.urls.full}))
 }
 
 export async function unsplashGetImage(imageId){
   const r = await unsplash.photos.get(
     { photoId: imageId },
-  )  
-  return {url: r.urls.thumb, full: r.urls.full}
+  )
+  return {thumb: r.response.urls.thumb, full: r.response.urls.full}
 }

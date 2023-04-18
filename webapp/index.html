@@ -186,7 +186,7 @@ class ImageSearch extends EventEmitter{
       const results = await postRequest('/api/imagesearch', {query: elInput.value})
       elResultsList.innerHTML = results.map(img => `
         <li data-image-full="${img.full}">
-          <img src=${img.url} />
+          <img src=${img.thumb} />
         </li>
       `).join('')
     }
