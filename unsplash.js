@@ -20,5 +20,5 @@ export async function unsplashGetImage(imageId){
   const r = await unsplash.photos.get(
     { photoId: imageId },
   )
-  return {thumb: r.response.urls.thumb, full: r.response.urls.full}
+  return {thumb: r.response.urls.thumb, full: r.response.links.download}
 }

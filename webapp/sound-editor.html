@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound Editor</title>
+  <!-- wavesurfer.js -->
+  <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+
+  <!-- plugins -->
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.js"></script>
+  <style>
+    html,
+    body {
+      font-family: sans-serif;
+    }
+
+    region.wavesurfer-region:before {
+      content: attr(data-region-label);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      display: block;
+    }
+
+    .zoom-slider {
+      width: 300px;
+      margin-left: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="demo">
+    <button id="play">play</button>
+    <button id="pause">pause</button>
+
+    <div id="wave-timeline"></div>
+
+    <div id="waveform">
+      <!-- Here be waveform -->
+    </div>
+  </div>
+
+  <div class="zoom-slider">
+    <input data-action="zoom" id="slider" type="range" min="20" max="1000" value="0" style="width: 100%">
+  </div>
+
+  <form role="form" name="edit" style="opacity: 0; transition: opacity 300ms linear; margin: 30px 0;">
+    <div class="form-group">
+      <label for="start">Start</label>
+      <input class="form-control" id="start" name="start" />
+    </div>
+
+    <div class="form-group">
+      <label for="end">End</label>
+      <input class="form-control" id="end" name="end" />
+    </div>
+
+    <div class="form-group">
+      <label for="label">label</label>
+      <textarea id="label" class="form-control" rows="3" name="label"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">Save</button>
+    <center><i>or</i></center>
+    <button type="button" class="btn btn-danger btn-block" data-action="delete-region">Delete</button>
+  </form>
+
+
+  <script>
+    /**
+     * Create a WaveSurfer instance.
+     */
+    var wavesurfer; // eslint-disable-line no-var
+
+    /**
+     * Init & load.
+     */
+    document.addEventListener('DOMContentLoaded', function () {
+      // Init wavesurfer
+      wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        height: 128,
+        pixelRatio: 1,
+        scrollParent: true,
+        normalize: true,
+        backend: 'MediaElement',
+        plugins: [
+          WaveSurfer.regions.create(),
+          WaveSurfer.timeline.create({
+            container: '#wave-timeline',
+            notchPercentHeight: 60
+          })
+        ]
+      });
+
+      wavesurfer.load('audio.wav');
+
+      /* Regions */
+
+      wavesurfer.on('ready', function () {
+        wavesurfer.enableDragSelection({
+          color: randomColor(0.1)
+        });
+
+        if (localStorage.regions) {
+          loadRegions(JSON.parse(localStorage.regions));
+        }
+      });
+      wavesurfer.on('region-click', function (region, e) {
+        e.stopPropagation();
+        // Play on click, loop on shift click
+        e.shiftKey ? region.playLoop() : region.play();
+      });
+      wavesurfer.on('region-click', editAnnotation);
+      wavesurfer.on('region-updated', saveRegions);
+      wavesurfer.on('region-removed', saveRegions);
+
+      wavesurfer.on('region-play', function (region) {
+        region.once('out', function () {
+          wavesurfer.play(region.start);
+          wavesurfer.pause();
+        });
+      });
+
+      /* Toggle play/pause buttons. */
+      let playButton = document.querySelector('#play');
+      let pauseButton = document.querySelector('#pause');
+      wavesurfer.on('play', function () {
+        playButton.style.display = 'none';
+        pauseButton.style.display = '';
+      });
+      wavesurfer.on('pause', function () {
+        playButton.style.display = '';
+        pauseButton.style.display = 'none';
+      });
+      playButton.addEventListener('click', () => wavesurfer.play())
+      pauseButton.addEventListener('click', () => wavesurfer.pause())
+
+
+      document.querySelector(
+        '[data-action="delete-region"]'
+      ).addEventListener('click', function () {
+        let form = document.forms.edit;
+        let regionId = form.dataset.region;
+        if (regionId) {
+          wavesurfer.regions.list[regionId].remove();
+          form.reset();
+        }
+      });
+    });
+
+    /**
+     * Save annotations to localStorage.
+     */
+    function saveRegions() {
+      localStorage.regions = JSON.stringify(
+        Object.keys(wavesurfer.regions.list).map(function (id) {
+          let region = wavesurfer.regions.list[id];
+          return {
+            start: region.start,
+            end: region.end,
+            attributes: region.attributes,
+            data: region.data
+          };
+        })
+      );
+    }
+
+    /**
+     * Load regions from localStorage.
+     */
+    function loadRegions(regions) {
+      regions.forEach(function (region) {
+        region.color = randomColor(0.1);
+        wavesurfer.addRegion(region);
+      });
+    }
+
+    /**
+     * Random RGBA color.
+     */
+    function randomColor(alpha) {
+      return (
+        'rgba(' +
+        [
+          ~~(Math.random() * 255),
+          ~~(Math.random() * 255),
+          ~~(Math.random() * 255),
+          alpha || 1
+        ] +
+        ')'
+      );
+    }
+
+    /**
+     * Edit annotation for a region.
+     */
+    function editAnnotation(region) {
+      let form = document.forms.edit;
+      form.style.opacity = 1;
+      (form.elements.start.value = Math.round(region.start * 10) / 10),
+        (form.elements.end.value = Math.round(region.end * 10) / 10);
+      form.elements.label.value = region.attributes.label || '';
+      form.onsubmit = function (e) {
+        e.preventDefault();
+        region.update({
+          start: form.elements.start.value,
+          end: form.elements.end.value,
+          attributes: {
+            label: form.elements.label.value
+          }
+        });
+        form.style.opacity = 0;
+      };
+      form.onreset = function () {
+        form.style.opacity = 0;
+        form.dataset.region = null;
+      };
+      form.dataset.region = region.id;
+    }
+
+    document.querySelector('#slider').oninput = function () {
+      wavesurfer.zoom(Number(this.value));
+    };
+
+  </script>
+</body>
+
+</html>

@@ -6,19 +6,25 @@ import { stitchFramesToVideo } from './utils/stitchFramesToVideo.js';
 import { drawImageProp } from './utils/drawImageProp.js';
 import { drawCaption } from './utils/drawCaption.js';
 import { readProjectLabels } from './utils.js'
+import { downloadImage } from './downloader.js';
 
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
 const tmpFolder = 'tmp'
 
-// Clean up the temporary directories first
-for (const path of ['out', tmpFolder+'/output']) {
+async function cleanup(){
+  // Clean up the temporary directories first
+  for (const path of ['out', tmpFolder+'/output']) {
     if (fs.existsSync(path)) {
         await fs.promises.rm(path, { recursive: true });
     }
     await fs.promises.mkdir(path, { recursive: true });
+  }
 }
+
+// await cleanup();
+
 
 const project = "shortNewYorkFastTour";
 
@@ -31,7 +37,7 @@ console.log(labels.length)
 
 // The video length and frame rate, as well as the number of frames required
 // to create the video
-const duration = 87.6;
+const duration = 2 * 60 + 2;
 const frameRate = 24;
 const frameCount = Math.floor(duration * frameRate);
 
@@ -41,6 +47,8 @@ for (let i = 0; i < frameCount; i++) {
     const time = i / frameRate;
 
     console.log(`Rendering frame ${i} at ${Math.round(time * 10) / 10} seconds...`);
+
+    if(fs.existsSync(getFrameFilePath(i))) continue;
 
     // Clear the canvas with a white background color. This is required as we are
     // reusing the canvas with every frame
@@ -64,7 +72,7 @@ console.log("finished frames")
 // Stitch all frames together with FFmpeg
 await stitchFramesToVideo(
   tmpFolder+'/output/frame-%04d.png',
-  `${project}/audio.wav`,
+  `projects/${project}/audio.wav`,
   'out/video.mp4',
   duration,
   frameRate,
@@ -85,7 +93,8 @@ async function renderFrame(ctx, time) {
     }
 
     if(lastLabelIndex != labelIndex){
-      let frameImage = await loadImage(labels[labelIndex].imageFull)
+      const fileLocation = await downloadImage(labels[labelIndex].imageFull)
+      let frameImage = await loadImage(fileLocation)
       drawImageProp(ctx, frameImage);
       drawCaption(ctx, labels[labelIndex].text)
       lastLabelIndex = labelIndex;
