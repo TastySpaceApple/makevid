@@ -26,7 +26,7 @@ async function cleanup(){
 // await cleanup();
 
 
-const project = "shortNewYorkFastTour";
+const project = "momPartner";
 
 const canvas = new Canvas(720, 1280);
 const context = canvas.getContext('2d');
@@ -37,7 +37,7 @@ console.log(labels.length)
 
 // The video length and frame rate, as well as the number of frames required
 // to create the video
-const duration = 2 * 60 + 2;
+const duration = 2 * 60 + 10;
 const frameRate = 24;
 const frameCount = Math.floor(duration * frameRate);
 
@@ -48,7 +48,7 @@ for (let i = 0; i < frameCount; i++) {
 
     console.log(`Rendering frame ${i} at ${Math.round(time * 10) / 10} seconds...`);
 
-    if(fs.existsSync(getFrameFilePath(i))) continue;
+    // if(fs.existsSync(getFrameFilePath(i))) continue;
 
     // Clear the canvas with a white background color. This is required as we are
     // reusing the canvas with every frame

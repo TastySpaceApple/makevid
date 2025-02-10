@@ -224,7 +224,7 @@ class TextsList extends EventEmitter{
   }
 
   async load(){
-    const project = 'shortNewYorkFastTour';
+    const project = 'momPartner';
     const data = await postRequest('/load', {project})
     this._el.innerHTML = data.map((d, index) => {
       return `<li data-index=${index}>
@@ -237,7 +237,7 @@ class TextsList extends EventEmitter{
   }
 
   async save(){
-    const project = 'shortNewYorkFastTour';
+    const project = 'momPartner';
     await postRequest('/save', {project, data: this._data})
   }
 

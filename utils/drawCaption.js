@@ -6,8 +6,20 @@ export function drawCaption(ctx, text){
   const w = ctx.canvas.width;
   const h = ctx.canvas.height;
 
+  if(text.length > 30){ // multine
+    let wbr = text.indexOf(" ", 12);
+    let line1 = text.substr(0, wbr);
+    let line2 = text.substr(wbr+1);
 
-  if(text.length > 18){ // multine
+    let wbr2 = line2.indexOf(" ", 12);
+    let line3 = line2.substr(wbr2);
+    line2 = line2.substr(0, wbr2);
+
+    draw(ctx, line1, w/2, h/2-2*textHeight/1.3)
+    draw(ctx, line2, w/2, h/2)
+    draw(ctx, line3, w/2, h/2+2*textHeight/1.3)
+  }
+  else if(text.length > 18){ // multine
     let wbr = text.indexOf(" ", 12);
     let line1 = text.substr(0, wbr);
     let line2 = text.substr(wbr+1);
